@@ -1,5 +1,9 @@
 import 'package:assignment_module/module_5/2/user.dart';
 import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
+
+
+import '../model/user.dart';
 
 class DataBaseHelper {
   //database name and version
@@ -53,9 +57,6 @@ class DataBaseHelper {
   Future<int?> insertUser(User user) async {
     Database? db = await database;
 
-
-
-    var replace;
     return await db?.insert(_tableUser, user.toMap(),
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
@@ -63,7 +64,7 @@ class DataBaseHelper {
   Future<List<User>> getUserList() async {
     List<User> userList = [];
     Database? db = await database;
-    List<Map<String, dynamic>> list = await db!.query(_tableUser, whereArgs: []);
+    List<Map<String, dynamic>> list = await db!.query(_tableUser);
 
     userList = List.generate(list.length, (index) => User.fromMap(list[index]))
         .toList();
@@ -93,10 +94,6 @@ class DataBaseHelper {
     return userList[0];
   }
 
-  openDatabase(String path, {required int version, required Null Function(dynamic db, dynamic version) onCreate}) {}
-
-  getDatabasesPath() {}
-
 // Future<List<User>> readUserList() async {
 //   Database? db = await database;
 //   //db.rawQuery("select * from $_tableUser");
@@ -115,17 +112,4 @@ class DataBaseHelper {
 //         age: maps[i]['name'] as int),
 //   );
 // }
-}
-
-class ConflictAlgorithm {
-}
-
-class Database {
-  insert(String tableUser, Map<String, dynamic> map, {required conflictAlgorithm}) {}
-
-  update(String tableUser, Map<String, dynamic> map, {required String where, required List<int?> whereArgs}) {}
-
-  delete(String tableUser, {required String where, required List<int> whereArgs}) {}
-
-  query(String tableUser, {required String where, required List<int> whereArgs}) {}
 }
