@@ -63,7 +63,7 @@ class _UserListPageState extends State<UserListPage> {
               },
               title: Text(userList[index].name),
               subtitle: Text(
-                  '${userList[index].email} \n ${userList[index].contact}'),
+                  '${userList[index].email} \n ${userList[index].contact} \n ${userList[index].age}'),
               isThreeLine: true,
             );
           }),
