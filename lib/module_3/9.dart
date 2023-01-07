@@ -65,7 +65,7 @@ class HomePage extends StatelessWidget {
     if (value == 'edit') {
       message = 'You selected edit for $name';
     } else if (value == 'delete') {
-      message = 'You selected delete for $name';
+      message = 'You selcted delete for $name';
     } else {
       message = 'Not implemented';
     }
